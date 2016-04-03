@@ -4,16 +4,16 @@
  *
  * WordPress plugin header information:
  *
- * * Plugin Name: My_WP_Plugin
- * * Plugin URI: https://github.com/meitar/My_WP_Plugin
- * * Description: My Plugin Description
- * * Version: 0.1
- * * Author: My Name <my_email_address@example.com>
- * * Author URI: https://example.com/
- * * License: GPL-3
- * * License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
- * * Text Domain: My_WP_Plugin
- * * Domain Path: /languages
+ * Plugin Name: My_WP_Plugin
+ * Plugin URI: https://github.com/meitar/My_WP_Plugin
+ * Description: My Plugin Description
+ * Version: 0.1
+ * Author: Pea, Glocal <pea@glocal.coop>
+ * Author URI: https://glocal.coop/
+ * License: GPL-3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
+ * Text Domain: My_WP_Plugin
+ * Domain Path: /languages
  *
  * @link https://developer.wordpress.org/plugins/the-basics/header-requirements/
  *
@@ -59,12 +59,20 @@ class My_WP_Plugin {
     public static function register () {
         add_action('plugins_loaded', array(__CLASS__, 'registerL10n'));
         add_action('init', array(__CLASS__, 'initialize'));
-        add_action('admin_head', array(__CLASS__, 'addHelpTab'));
-        add_action('admin_head', array(__CLASS__, 'addHelpSidebar'));
 
         register_activation_hook(__FILE__, array(__CLASS__, 'activate'));
         register_deactivation_hook(__FILE__, array(__CLASS__, 'deactivate'));
     }
+
+    /**
+     * Intialize
+     *
+     * @link https://developer.wordpress.org/reference/hooks/init/
+     */
+    public static function initialize () {
+        //TODO
+    }
+
 
     /**
      * Loads localization files from plugin's languages directory.
@@ -78,20 +86,6 @@ class My_WP_Plugin {
     }
 
     /**
-     * Loads plugin componentry and calls that component's register()
-     * method. Called at the WordPress `init` hook.
-     *
-     * @return void
-     */
-    public static function initialize () {
-        if (!class_exists('WP_Screen_Help_Loader')) {
-            require_once 'includes/vendor/wp-screen-help-loader/class-wp-screen-help-loader.php';
-        }
-
-        // TODO
-    }
-
-    /**
      * Method to run when the plugin is activated by a user in the
      * WordPress Dashboard admin screen.
      *
@@ -101,6 +95,9 @@ class My_WP_Plugin {
      */
     public static function activate () {
         self::checkPrereqs();
+        self::initialize();
+
+        $plugin = new self();
     }
 
     /**
@@ -155,33 +152,6 @@ class My_WP_Plugin {
      */
     public static function deactivate () {
         // TODO
-    }
-
-    /**
-     * Attaches on-screen help tabs to the WordPress built-in help.
-     *
-     * Loads the appropriate document from the localized `help` folder
-     * and inserts it as a help tab on the current screen.
-     *
-     * @uses WP_Screen_Help_Loader::applyTabs()
-     *
-     * @return void
-     */
-    public static function addHelpTab () {
-        $help = new WP_Screen_Help_Loader(plugin_dir_path(__FILE__) . 'help');
-        $help->applyTabs();
-    }
-
-    /**
-     * Appends appropriate sidebar content based on current screen.
-     *
-     * @uses WP_Screen_Help_Loader::applySidebar()
-     *
-     * @return void
-     */
-    public static function addHelpSidebar () {
-        $help = new WP_Screen_Help_Loader(plugin_dir_path(__FILE__) . 'help');
-        $help->applySidebar();
     }
 
     /**

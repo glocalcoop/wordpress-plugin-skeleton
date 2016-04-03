@@ -1,0 +1,17 @@
+{
+    "name": "glocalcoop/My_WP_Plugin",
+    "description": "Simple plugin...",
+    "type": "wordpress-plugin",
+    "require-dev": {
+        "phpunit/phpunit": "^5.2"
+    },
+    "license": "GPL-3",
+    "authors": [
+        {
+            "name": "Pea Lutz",
+            "email": "pea@glocal.coop"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

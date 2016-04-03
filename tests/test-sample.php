@@ -1,10 +1,20 @@
 <?php
+/**
+ * Class SampleTest
+ *
+ * @package My_wp_plugin
+ */
 
-class SampleTest extends Plugin_UnitTestCase {
+/**
+ * Sample test case.
+ */
+class SampleTest extends WP_UnitTestCase {
 
+	/**
+	 * A single example test.
+	 */
 	function test_sample() {
-		// replace this with some actual testing code
+		// Replace this with some actual testing code.
 		$this->assertTrue( true );
 	}
 }
-

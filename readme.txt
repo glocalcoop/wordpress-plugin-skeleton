@@ -1,7 +1,6 @@
 === My_WP_Plugin ===
 Contributors: (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: comments, spam
+Tags: 
 Requires at least: 4.4
 Tested up to: 4.4.1
 Stable tag: 0.1
